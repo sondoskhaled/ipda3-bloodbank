@@ -18,6 +18,13 @@ use App\Models\Token;
 class MainController extends Controller
 {
 
+  public function UnReadNotificationCount(Request $request){
+    $client=Client::where('api_token',$request->api_token)->first();
+
+    $count=$client->notificationsMorph()->where('is_read',0)->count();
+    return apiResponsejson(1,'success',$count);
+  }
+
   public function governorates (){
 
         $governorates = Governorate::all();

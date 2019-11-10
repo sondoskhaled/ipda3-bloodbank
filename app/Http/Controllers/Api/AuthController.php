@@ -195,142 +195,15 @@ class AuthController extends Controller
     $client=Client::where('api_token',$request->api_token)->first();
 
         if($client){
-            if($request->has('name') || $request->has('city_id') || $request->has('phone') || $request->has('email') ||
-            $request->has('password') || $request->has('last_donation_date') || $request->has('d_o_b') || $request->has('blood_type_id') ){
-               
-                if ($request->has('name')) {
-                    $validator = validator()->make($request->all(),[
-                       'name' => 'required'
-                    ]);
-            
-                    if($validator->fails())
-                    {
-                        return apiResponsejson(0,$validator->errors()->first(),$validator->errors());
-                    }
+           if($request->has('password')){
+            $request->merge(['password'=> bcrypt($request->password)]);
+           }
 
-                    $client->name=$request->name;
-    
-                }
-    
-                if ($request->has('email')) {
-                    $validator = validator()->make($request->all(),[
-                        'email' => 'required|unique:clients'
-                     ]);
-             
-                     if($validator->fails())
-                     {
-                         return apiResponsejson(0,$validator->errors()->first(),$validator->errors());
-                     }
-
-                    $client->email=$request->email;
-    
-                }
-    
-                if ($request->has('phone')) {
-
-                    $validator = validator()->make($request->all(),[
-                        'phone' => 'required|unique:clients'
-                     ]);
-             
-                     if($validator->fails())
-                     {
-                         return apiResponsejson(0,$validator->errors()->first(),$validator->errors());
-                     }
-
-                    $client->phone=$request->phone;
-    
-                }
-    
-                if ($request->has('last_donation_date')) {
-
-                    $validator = validator()->make($request->all(),[
-                        'last_donation_date' => 'required|date|after:d_o_b'
-                     ]);
-             
-                     if($validator->fails())
-                     {
-                         return apiResponsejson(0,$validator->errors()->first(),$validator->errors());
-                     }
-
-                    $client->last_donation_date=$request->last_donation_date;
-    
-                }
-    
-                if ($request->has('d_o_b')) {
-                    $validator = validator()->make($request->all(),[
-                        'd_o_b' => 'required|date|before:tomorrow'
-                     ]);
-             
-                     if($validator->fails())
-                     {
-                         return apiResponsejson(0,$validator->errors()->first(),$validator->errors());
-                     }
-
-                    $client->d_o_b=$request->d_o_b;
-    
-                }
-    
-                if ($request->has('blood_type_id')) {
-                    $validator = validator()->make($request->all(),[
-                        'blood_type_id' => 'required|exists:blood_types,id'
-                     ]);
-             
-                     if($validator->fails())
-                     {
-                         return apiResponsejson(0,$validator->errors()->first(),$validator->errors());
-                     }
-
-                    $client->blood_type_id=$request->blood_type_id;
-    
-                }
-    
-                if ($request->has('password')) {
-                    $validator = validator()->make($request->all(),[
-                        'password' => 'required'
-                     ]);
-             
-                     if($validator->fails())
-                     {
-                         return apiResponsejson(0,$validator->errors()->first(),$validator->errors());
-                     }
-
-                    $client->password=$request->password;
-    
-                }
-    
-                if ($request->has('city_id')) {
-                    $validator = validator()->make($request->all(),[
-                        'city_id'=> 'required|exists:cities,id'
-                     ]);
-             
-                     if($validator->fails())
-                     {
-                         return apiResponsejson(0,$validator->errors()->first(),$validator->errors());
-                     }
-
-                    $client->city_id=$request->city_id;
-    
-                }
-
-                if($client->save()){
-                    return apiResponsejson(1,"تم حفظ التغيير بنجاح",[
-                        'client' => $client
-                    ]);
-                 }
-                 else{
-                    return apiResponsejson(0,"حدث خطأ الرجاء المحاولة في وقت لاحق");
-                 }
-    
-            }
-            
-            else{
-
-                return apiResponsejson(1,"بيانات العميل",[
-                    'client' => $client
-                ]);
-            }
-            
-            
+           $client->update($request->all());
+           return apiResponsejson(1,"تم حفظ التغيير بنجاح",[
+            'client' => $client
+             ]);
+   
         }
         else{
             return apiResponsejson(0,"حدث خطأ الرجاء المحاولة في وقت لاحق");

@@ -43,6 +43,7 @@ Route::group(['prefix' => 'v1' , 'namespace' => 'Api'],function(){
         Route::get('get_donation_requests','MainController@getDonationRequests');
         Route::post('create_donation_request','MainController@createDonationRequest');
         Route::get('notification_list','MainController@notificationList');
+        Route::get('unread_notification_count','MainController@UnReadNotificationCount');
         Route::post('register_token','AuthController@registerToken');
         Route::post('remove_token','AuthController@removeToken');
     });
