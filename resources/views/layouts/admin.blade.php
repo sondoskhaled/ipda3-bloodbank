@@ -136,13 +136,13 @@
             </ul>
           </li>
          
-          <li class="nav-header">EXAMPLES</li>
+          <!-- <li class="nav-header">EXAMPLES</li> -->
           <li class="nav-item">
-            <a href="../calendar.html" class="nav-link">
-              <i class="nav-icon far fa-calendar-alt"></i>
+            <a href="{{url(route('governorate.index'))}}" class="nav-link">
+              <i class="nav-icon fas fa-globe-africa"></i>
               <p>
-                Calendar
-                <span class="badge badge-info right">2</span>
+                Governorates
+                <!-- <span class="badge badge-info right">2</span> -->
               </p>
             </a>
           </li>
@@ -156,14 +156,14 @@
           </li>
           
           
-          =
-          <li class="nav-header">MISCELLANEOUS</li>
+         
+          <!-- <li class="nav-header">MISCELLANEOUS</li>
           <li class="nav-item">
             <a href="https://adminlte.io/docs/3.0" class="nav-link">
               <i class="nav-icon fas fa-file"></i>
               <p>Documentation</p>
             </a>
-          </li>
+          </li> -->
           
         
         </ul>
