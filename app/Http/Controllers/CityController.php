@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use Illuminate\Http\Request;
-use App\Models\Governorate;
 
-class GovernorateController extends Controller
+class CityController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class GovernorateController extends Controller
      */
     public function index()
     {
-        $records=Governorate::paginate(20);
-        return view('governorates.index',compact('records'));
+        $records=City::paginate(20);
+        return view('cities.index',compact('records'));
     }
 
     /**
@@ -25,7 +25,8 @@ class GovernorateController extends Controller
      */
     public function create()
     {
-        return view('governorates.create');
+        return view('cities.create');
+
     }
 
     /**
@@ -37,16 +38,19 @@ class GovernorateController extends Controller
     public function store(Request $request)
     {
         $rule = [
-            'name'=>'required'
+            'name'=>'required',
+            'governorate_id'=>'required|exists:governorates,id'
         ];
         $msg = [
-            'name.required'=>'this filed is required'
+            'name.required'=>'this filed is required',
+            'governorate_id.required'=>'this filed is required',
+            'governorate_id.exists'=>'this filed is not exist'
         ];
         $this->validate($request,$rule,$msg);
        
-        $record=Governorate::create($request->all());
-        flash()->success('governorate saved successfully');
-        return redirect(route('governorate.index'));
+        $record=City::create($request->all());
+        flash()->success('city saved successfully');
+        return redirect(route('city.index'));
     }
 
     /**
@@ -68,8 +72,8 @@ class GovernorateController extends Controller
      */
     public function edit($id)
     {
-        $model= Governorate::findOrFail($id);
-        return view('governorates.edit',compact('model'));
+        $model= City::findOrFail($id);
+        return view('cities.edit',compact('model'));
     }
 
     /**
@@ -81,10 +85,10 @@ class GovernorateController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $record= Governorate::findOrFail($id);
+        $record= City::findOrFail($id);
         $record->update($request->all());
-        flash()->success('governorate edited successfully');
-        return redirect(route('governorate.index'));
+        flash()->success('city edited successfully');
+        return redirect(route('city.index'));
     }
 
     /**
@@ -95,9 +99,9 @@ class GovernorateController extends Controller
      */
     public function destroy($id)
     {
-        $record= Governorate::findOrFail($id);
+        $record= City::findOrFail($id);
         $record->delete();
-        flash()->success('governorate deleted successfully');
-        return redirect(route('governorate.index'));
+        flash()->success('city deleted successfully');
+        return redirect(route('city.index'));
     }
 }

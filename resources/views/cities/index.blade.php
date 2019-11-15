@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title')
-List of governorates 
+List of cities 
 @endsection
 
 @section('content')
@@ -8,25 +8,26 @@ List of governorates
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">List of governorates </h3>
+                <h3 class="card-title">List of cities </h3>
                 @include('flash::message')
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
                     <div class="input-group-append">
-                      <a href="{{url(route('governorate.create'))}}" class="btn btn-success">
-                        <i class="fas fa-plus nav-icon"></i> Add gornorates</a>
+                      <a href="{{url(route('city.create'))}}" class="btn btn-success">
+                        <i class="fas fa-plus nav-icon"></i> Add city</a>
                     </div>
                   </div>
                 </div>
               </div>
-              <!-- /.card-header -->
               @if(count($records))
+              <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
                 <table class="table table-hover">
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>Name</th>
+                      <th>City Name</th>
+                      <th>Governorate Name</th>
                       <th>Edit</th>
                       <th>Delete</th>
                       
@@ -37,14 +38,15 @@ List of governorates
                     <tr>
                       <td>{{$loop->iteration}}</td>
                       <td>{{$record->name}}</td>
+                      <td>{{$record->governorate->name}}</td>
                       <td>
-                        <a href="{{url(route('governorate.edit',$record->id))}}" class="btn btn-success btn-xs">
+                        <a href="{{url(route('city.edit',$record->id))}}" class="btn btn-success btn-xs">
                           <i class="fa fa-edit"></i>
                         </a>
                       </td>
                       <td>
                       {!! Form::open([
-                        'action' => ['GovernorateController@destroy',$record->id],
+                        'action' => ['CityController@destroy',$record->id],
                         'method' => 'delete'
                         ]) !!}
                         <button type="submit" class="btn btn-danger btn-xs">

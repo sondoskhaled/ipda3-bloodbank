@@ -17,7 +17,8 @@
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
+  <!-- Jquery.confirm -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 </head>
 <body class="hold-transition sidebar-mini">
     <!-- Site wrapper -->
@@ -142,10 +143,19 @@
               <i class="nav-icon fas fa-globe-africa"></i>
               <p>
                 Governorates
-                <!-- <span class="badge badge-info right">2</span> -->
               </p>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a href="{{url(route('city.index'))}}" class="nav-link">
+              <i class="nav-icon fas fa-globe-africa"></i>
+              <p>
+                Cities
+              </p>
+            </a>
+          </li>
+
           <li class="nav-item">
             <a href="../gallery.html" class="nav-link">
               <i class="nav-icon far fa-image"></i>
@@ -222,6 +232,7 @@
 <script src="../../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
-
+<!-- Jquery.confirm -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 </body>
 </html>
