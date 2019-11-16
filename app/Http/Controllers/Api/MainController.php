@@ -117,7 +117,7 @@ class MainController extends Controller
 
       //get tokens
       $tokens=Token::whereIn('client_id',$clientsId)->where('token','!=',null)->pluck('token')->toArray();
-     
+    
        if(count($tokens)){
       
 
@@ -131,7 +131,7 @@ class MainController extends Controller
      //dd($tokens);
       $send=notifyByFirebase($title,$content,$tokens,$data);
       
-
+ 
 
        }
     }

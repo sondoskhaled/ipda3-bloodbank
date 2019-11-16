@@ -28,7 +28,7 @@ class AuthController extends Controller
       
       if($client)
         {
-            $client->tokens()->create($request->all());
+            $client->tokens()->create($request->all()); 
             return apiResponsejson(1,"تم الاضافه بنجاح");
           }else{
             return apiResponsejson(0,"حدث خطأ الرجاء المحاولة في وقت لاحق");

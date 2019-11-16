@@ -157,6 +157,33 @@
           </li>
 
           <li class="nav-item">
+            <a href="{{url(route('category.index'))}}" class="nav-link">
+              <i class="fas fa-project-diagram"></i>
+              <p>
+                 Categories
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{url(route('client.index'))}}" class="nav-link">
+            <i class="fas fa-users"></i>
+              <p>
+                 Clients
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{url(route('post.index'))}}" class="nav-link">
+            <i class="fas fa-file-alt"></i>
+              <p>
+                 Posts
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="../gallery.html" class="nav-link">
               <i class="nav-icon far fa-image"></i>
               <p>
