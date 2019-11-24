@@ -82,6 +82,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $rule = [
+            'name'=>'required',
+        ];
+        $msg = [
+            'name.required'=>'this filed is required',
+        ];
+        $this->validate($request,$rule,$msg);
+       
         $record= Category::findOrFail($id);
         $record->update($request->all());
         flash()->success('category edited successfully');

@@ -18,7 +18,8 @@ Add New Post
               <!-- /.card-header -->
               <!-- form start -->
               {!! Form::model($model,[
-                'action' => 'PostController@store'
+                'action' => 'PostController@store',
+                'files' => true
                 ]) !!}
                 <div class="card-body">
                 @include('partial.validate_errors')
@@ -52,7 +53,7 @@ Add New Post
                 <div class="form-group">
                     <label for="exampleInputImage">Post image</label>
 
-                    {!! Form::file('img',[
+                    {!! Form::File('img',[
                         'class' => 'form-control',
                         'placeholder' => 'choose image',
                         'id' => 'exampleInputImage'

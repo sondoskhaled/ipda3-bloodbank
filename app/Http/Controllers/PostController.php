@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Image;
 
 class PostController extends Controller
 {
@@ -39,22 +40,35 @@ class PostController extends Controller
         $rule = [
             'title'=>'required',
             'content'=>'required',
-            'img'=>'required',
+            'img'=>'required|image|mimes:jpeg,png,jpg|max:2048',
             'category_id'=>'required|exists:categories,id'
         ];
         $msg = [
             'title.required'=>'this filed is required',
             'content.required'=>'this filed is required',
             'img.required'=>'this filed is required',
-            'governorate_id.required'=>'this filed is required',
-            'governorate_id.exists'=>'this filed is not exist'
+            'category_id.required'=>'this filed is required',
+            'category_id.exists'=>'this filed is not exist'
         ];
         $this->validate($request,$rule,$msg);
-       
-        dd($request->img);
-        // $record=City::create($request->all());
-        // flash()->success('city saved successfully');
-        // return redirect(route('city.index'));
+        $record=new Post();
+       // dd($request->img); 
+        if($request->hasFile('img')){
+            $photo=$request->img;
+            $filename=time()."-".$photo->getClientOriginalName();
+            $dist=public_path('images/posts/'.$filename);
+            Image::make($photo)->resize(800,400)->save($dist);
+            $photoPath='images/posts/'.$filename;
+            //dd($photoPath);
+
+            $record->img=$photoPath;
+            }
+            $record->title=$request->title;
+            $record->content=$request->content;
+            $record->category_id=$request->category_id;
+            $record->save();
+            flash()->success('post saved successfully');
+            return redirect(route('post.index'));
     }
 
     /**
@@ -76,7 +90,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $model= Post::findOrFail($id);
+        return view('posts.edit',compact('model'));
     }
 
     /**
@@ -88,7 +103,38 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rule = [
+            'title'=>'required',
+            'content'=>'required',
+            'img'=>'image|mimes:jpeg,png,jpg|max:2048',
+            'category_id'=>'required|exists:categories,id'
+        ];
+        $msg = [
+            'title.required'=>'this filed is required',
+            'content.required'=>'this filed is required',
+            'img.required'=>'this filed is required',
+            'category_id.required'=>'this filed is required',
+            'category_id.exists'=>'this filed is not exist'
+        ];
+        $this->validate($request,$rule,$msg);
+        $record=Post::findOrFail($id);
+       // dd($request->img); 
+        if($request->hasFile('img')){
+            $photo=$request->img;
+            $filename=time()."-".$photo->getClientOriginalName();
+            $dist=public_path('images/posts/'.$filename);
+            Image::make($photo)->resize(800,400)->save($dist);
+            $photoPath='images/posts/'.$filename;
+            //dd($photoPath);
+
+            $record->img=$photoPath;
+            }
+            $record->title=$request->title;
+            $record->content=$request->content;
+            $record->category_id=$request->category_id;
+            $record->save();
+            flash()->success('post Edited successfully');
+            return redirect(route('post.index'));
     }
 
     /**
@@ -99,6 +145,10 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        $record= Post::findOrFail($id);
+        $record->delete();
+        flash()->success('post deleted successfully');
+        return redirect(route('post.index'));
     }
 }

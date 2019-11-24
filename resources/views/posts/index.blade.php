@@ -19,32 +19,40 @@ List of posts
                   </div>
                 </div>
               </div>
-             
+              @if(count($records))
+              <div class="row">
+              @foreach ($records as $record)
               <!-- /.card-header -->
               <div class="col-md-6 mt-3">
             <!-- Box Comment -->
             <div class="card card-widget">
               <div class="card-header">
                 <div class="user-block">
-                  <span class="username"><a href="#">Post title</a></span>
-                  <span class="description">Published at - 7:30 PM Today</span>
+                  <span class="username"><a href="#">{{$record->title}}</a></span>
+                  <span class="description">Published at - {{$record->created_at}}</span>
                   
                 </div>
                 <!-- /.user-block -->
 
-                <div class="card-tools mt-2">
-                <button type="button" class="btn btn-success btn-sm">
-                    <i class="fas fa-edit"></i> Edit</button>
-                <button type="button" class="btn btn-danger btn-sm">
+                <div class="card-tools  mt-2">
+                {!! Form::open([
+                    'action' => ['PostController@destroy',$record->id],
+                    'method' => 'delete'
+                    ]) !!}
+                    <a href="{{url(route('post.edit',$record->id))}}" class="btn btn-success btn-sm">
+                    <i class="fas fa-edit"></i> Edit</a>
+                
+                    <button type="submit" class="btn btn-danger btn-sm">
                     <i class="fas fa-trash"></i> Delete</button>
+                  {!! Form::close() !!}
                 </div>
-            
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <img class="img-fluid pad" src="../dist/img/photo2.png" alt="Photo">
+                <p>{{$record->category->name}}</p>
+                <img class="img-fluid pad" src="{{$record->img}}" alt="Photo">
 
-                <p>post body</p>
+                <p>{{$record->content}}</p>
                 
                 
               </div>
@@ -55,12 +63,14 @@ List of posts
             <!-- /.card -->
           </div>
           <!-- /.col -->
+          @endforeach
+              </div>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
           </div>
         
-          @if(count($records))
+         
 
          @else
          <div class="alert alert-danger" role="alert">

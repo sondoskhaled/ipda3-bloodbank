@@ -96,6 +96,7 @@ class AuthController extends Controller
         // $auth= auth()->guard('api')->validate($request->all());
             $client=Client::where('phone',$request->phone)->first();
             if($client){
+                if($client->is_active == 1){
                 if(Hash::check($request->password,$client->password)){
                     return apiResponsejson(1,"تم تسجيل الدخول بنجاح",[
                         'api_token' => $client->api_token,
@@ -105,6 +106,9 @@ class AuthController extends Controller
                     return apiResponsejson(0,"البيانات غير صحيحه");
         
                 }
+            }else{
+                return apiResponsejson(0,"الحساب غير مفعل بالرجاء انتظار التفعيل");
+            }
             }
             else{
                 return apiResponsejson(0,"البيانات غير صحيحه");

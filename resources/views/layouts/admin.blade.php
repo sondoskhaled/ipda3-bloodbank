@@ -19,6 +19,23 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!-- Jquery.confirm -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+
+ <!-- daterange picker -->
+  <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
+  <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- Bootstrap Color Picker -->
+  <link rel="stylesheet" href="../../plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+  <!-- Tempusdominus Bbootstrap 4 -->
+  <link rel="stylesheet" href="../../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+  <!-- Bootstrap4 Duallistbox -->
+  <link rel="stylesheet" href="../../plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  
 </head>
 <body class="hold-transition sidebar-mini">
     <!-- Site wrapper -->
@@ -68,6 +85,10 @@
             </a>
 
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                <a class="dropdown-item" href="{{ route('user.changePass') }}">
+                    Change Password
+                </a>
                 <a class="dropdown-item" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                                   document.getElementById('logout-form').submit();">
@@ -77,6 +98,8 @@
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
+
+
             </div>
         </li>
             
@@ -112,7 +135,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview">
+          <!-- <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
               <p>
@@ -135,7 +158,7 @@
               </li>
              
             </ul>
-          </li>
+          </li> -->
          
           <!-- <li class="nav-header">EXAMPLES</li> -->
           <li class="nav-item">
@@ -184,10 +207,46 @@
           </li>
 
           <li class="nav-item">
-            <a href="../gallery.html" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
+            <a href="{{url(route('contact.index'))}}" class="nav-link">
+            <i class="fas fa-envelope"></i>
               <p>
-                Gallery
+                Contacts
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{url(route('donation.index'))}}" class="nav-link">
+            <i class="fas fa-tint"></i>
+              <p>
+                Donation Request
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{url(route('setting.index'))}}" class="nav-link">
+             <i class="fas fa-cog"></i>
+              <p>
+                Settings
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{url(route('user.index'))}}" class="nav-link">
+             <i class="fas fa-users"></i>
+              <p>
+                users
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{url(route('role.index'))}}" class="nav-link">
+             <i class="fas fa-users-cog"></i>
+              <p>
+                Roles
               </p>
             </a>
           </li>
@@ -251,15 +310,35 @@
   </footer>     
     @endguest
 
-  <!-- jQuery -->
+
+<!-- jQuery -->
 <script src="../../plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="../../plugins/select2/js/select2.full.min.js"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src="../../plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<!-- InputMask -->
+<script src="../../plugins/moment/moment.min.js"></script>
+<script src="../../plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
+<!-- date-range-picker -->
+<script src="../../plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap color picker -->
+<script src="../../plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="../../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Bootstrap Switch -->
+<script src="../../plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
 <!-- Jquery.confirm -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
+<!-- Page script -->
+
+@stack('script')
 </body>
 </html>

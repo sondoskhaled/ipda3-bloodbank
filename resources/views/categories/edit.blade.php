@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title')
-Edit City
+Edit Category
 @endsection
 
 @section('content')

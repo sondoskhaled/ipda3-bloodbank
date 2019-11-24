@@ -24,7 +24,7 @@ Route::group(['prefix' => 'v1' , 'namespace' => 'Api'],function(){
     Route::get('cities','MainController@cities');
     Route::get('categories','MainController@categories');
     Route::get('settings','MainController@settings');
-    Route::get('contacts','MainController@contacts');
+    Route::post('contacts','MainController@contacts');
     Route::get('blood_types','MainController@bloodTypes');
     Route::post('register','AuthController@register');
     Route::post('login','AuthController@login');

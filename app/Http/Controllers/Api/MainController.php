@@ -42,9 +42,26 @@ class MainController extends Controller
    return apiResponsejson(1,'success',$settings);
  }
 
- public function contacts(){
-   $contacts = Contact::all();
-   return apiResponsejson(1,'success',$contacts);
+ public function contacts(Request $request){
+  $validator = validator()->make($request->all(),[
+    'name' => 'required',
+    'phone' => 'required',
+    'email' => 'required',
+    'subject' => 'required',
+    'msg' => 'required'
+  ]);
+
+  if($validator->fails())
+  {
+      return apiResponsejson(0,$validator->errors()->first(),$validator->errors());
+  }
+
+   $contacts = Contact::create($request->all());
+   if($contacts)
+   {return apiResponsejson(1,'success',$contacts);}
+   else{
+    return apiResponsejson(0,'fail',$contacts);
+   }
  }
 
  public function categories(){
@@ -130,7 +147,7 @@ class MainController extends Controller
 
      //dd($tokens);
       $send=notifyByFirebase($title,$content,$tokens,$data);
-      
+     // dd($send);
  
 
        }
