@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="../../plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-  
+   
 </head>
 <body class="hold-transition sidebar-mini">
     <!-- Site wrapper -->

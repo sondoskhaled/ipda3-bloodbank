@@ -17,6 +17,19 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::group(['prefix' => 'client'],function(){
+
+    Route::get('index', function () {
+        return view('website.index');
+    });
+ });
+
+Route::group(['middleware'=>['auth'] ,'prefix' => 'client'],function(){
+
+Route::get('/home','HomeController@index')->name('client_home');
+    });
+
+
 Route::group(['middleware'=>['auth','auto-check-permission'] ,'prefix' => 'admin'],function(){
 
 Route::get('/home','HomeController@index')->name('home');
