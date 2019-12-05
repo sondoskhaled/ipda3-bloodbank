@@ -29,7 +29,7 @@ Add New Post
                      ['class' => 'form-control',
                      'id' => 'exampleInputSelect',
                      'placeholder' => 'Select Category ...']) !!}
-                </div>
+                </div> 
                 <div class="form-group">
                     <label for="exampleInputTitle">Post Title</label>
 

@@ -46,7 +46,7 @@
                     <a href="{{$setting->fb_link}}"><i
                             class="fab fa-facebook-f facebook">&nbsp;&nbsp;</i></a>
                     <a href="{{$setting->tw_link}}"><i class="fab fa-twitter twitter">&nbsp;&nbsp;</i></a>
-                    <a href="{{$setting->whatsapp_link}}"><i
+                    <a href="{{$setting->whatsapp_link}} "><i
                             class="fab fa-whatsapp whats">&nbsp;&nbsp;</i></a>
                 </div>
                 <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
@@ -89,10 +89,12 @@
                         <a class="nav-link" href="contact-us.html">Contact Us</a>
                     </li>
                 </ul>
+                <ul class="navbar-nav ml-auto">
                 @guest
-                <button class="btn login" onclick= "window.location.href = 'login.html';">Login</button>
+                
+                <a class="btn login" href="{{ route('client_login') }}" >Login</a>
                 @if (Route::has('register'))
-                <button class="btn signup" onclick= "window.location.href = 'signup.html';">New Account</button>
+                <a class="btn signup" href="{{ route('client_register') }}">New Account</a>
                 @endif
                 @else
                 <li class="nav-item dropdown">
@@ -119,6 +121,7 @@
                     </div>
                 </li>
                 @endguest
+                </ul>
             </div>
         </nav>
     </section>

@@ -68,7 +68,7 @@
         
             
                 <div class="top-right links">
-                <a href="{{ url('client/index') }}">Client index</a>
+                <a href="{{ route('client_index') }}">Client index</a>
                 @if (Route::has('login'))
                     @auth
                         <a href="{{ route('home') }}">Home</a>

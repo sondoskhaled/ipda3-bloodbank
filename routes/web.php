@@ -19,15 +19,23 @@ Route::get('/', function () {
 Auth::routes();
 Route::group(['prefix' => 'client'],function(){
 
-    Route::get('index', function () {
-        return view('website.index');
+    Route::group(['middleware'=>['auth:client']],function(){
+        Route::get('/home','Website\MainController@home')->name('client_home');
     });
+    Route::group(['middleware'=>['guest:client']],function(){
+        Route::get('/login','Website\MainController@showLoginForm')->name('client_login');
+        Route::post('/login','Website\MainController@login')->name('client_login_submit');
+        Route::get('/register','Website\MainController@showRegisterForm')->name('client_register');
+        Route::post('/register','Website\MainController@register')->name('client_register_submit');
+        
+    });
+    
+    Route::get('/','Website\MainController@index')->name('client_index');
+    
+
  });
 
-Route::group(['middleware'=>['auth'] ,'prefix' => 'client'],function(){
 
-Route::get('/home','HomeController@index')->name('client_home');
-    });
 
 
 Route::group(['middleware'=>['auth','auto-check-permission'] ,'prefix' => 'admin'],function(){
