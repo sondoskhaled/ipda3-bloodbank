@@ -1,5 +1,5 @@
 @extends('website.layouts.app')
-@inject('model','App\Models\Client')
+
 @inject('bloodType','App\Models\BloodType')
 @inject('city','App\Models\City')
 @section('content')
@@ -8,7 +8,7 @@
         <div class="container">
             <div class="path">
                 <div class="path-main" style="color: darkred; display:inline-block;">Home</div>
-                <div class="path-directio" style="color: grey; display:inline-block;"> / Sign up</div>
+                <div class="path-directio" style="color: grey; display:inline-block;"> / Profile</div>
             </div>
 
         </div>
@@ -20,7 +20,8 @@
         <div class="container">
                 <img src="imgs/logo.png" alt="">
                 {!! Form::model($model,[
-                'action' => 'Website\MainController@register'
+                'action' => ['Website\MainController@profileEdit',Auth::user()->id],
+                'method' => 'put'
                 ]) !!}
                 @include('partial.validate_errors')
                 
@@ -72,15 +73,7 @@
                         'required' => 'required'
                         ]) !!} 
                 </div>
-                <div class="form-group">
-                   
-                    {!! Form::password('password',null,[
-                        'class' => 'form-control',
-                        'placeholder' => 'Password',
-                        'required' => 'required'
-                        ]) !!} 
-                </div>
-
+       
                 <div class="form-group">
                    
                    {!! Form::date('last_donation_date', \Carbon\Carbon::now(),[
@@ -90,8 +83,7 @@
                        ]) !!} 
                 </div>
                     <div class="reg-group">
-                        <input class="check" name="agree" type="checkbox" required="true" style="height: auto; display:inline; margin: 0 auto;">Agree on terms and conditions<br>
-                        <button class="submit" type="submit" style="background-color: rgb(51, 58, 65);">Submit</button>
+                       <button class="submit" type="submit" style="background-color: rgb(51, 58, 65);">Save</button>
                     </div>
                 {!! Form::close() !!}
         </div>

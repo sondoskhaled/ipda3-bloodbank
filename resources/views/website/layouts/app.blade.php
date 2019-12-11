@@ -21,7 +21,7 @@
 </head>
 
 <body>
-@inject('settings','App\Models\Setting')
+
 @foreach($settings->all() as $setting)
                  
                     
@@ -70,23 +70,37 @@
             <img src="{{ asset('website/imgs/logo.png') }}" width="18%"></img>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
+                @guest
                     <li class="nav-item">
-                        <a class="nav-link selected" href="index.html">Home</a>
+                        <a class="nav-link selected" href="{{ route('client_index') }}">Home</a>
                     </li>
+                @else
                     <li class="nav-item">
-                        <a class="nav-link" href="About-us.html">About Us</a>
+                        <a class="nav-link selected" href="{{ route('client_home') }}">Home</a>
                     </li>
+                @endguest
+                    
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('about') }}">About Us</a>
+                    </li>
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="#">Articles</a>
-                    </li>
+                    </li>-->
+                    @guest
+                    
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('request_show') }}">Add Request</a>
+                        </li>
+                    @endguest
                     <li class="nav-item">
-                        <a class="nav-link" href="requests.html">Donations</a>
-                    </li>
-                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('donations') }}">Donations</a>
+                    </li> 
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="who-we-are.html">Who We Are ?</a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
-                        <a class="nav-link" href="contact-us.html">Contact Us</a>
+                        <a class="nav-link" href="{{ route('contact_us') }}">Contact Us</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
@@ -104,8 +118,8 @@
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
-                        <a class="dropdown-item" href="{{ route('user.changePass') }}">
-                            Change Password
+                        <a class="dropdown-item" href="{{ route('profile') }}">
+                            profile
                         </a>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
@@ -183,6 +197,8 @@
     <script type="text/javascript" src="{{ asset('website/js/swiper.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('website/js/wow.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('website/js/main.js') }}"></script>
+
+    @stack('script1')
 </body>
 
 </html>

@@ -1,9 +1,9 @@
 @extends('website.layouts.app')
+@inject('model','App\Models\DonationRequest')
 @inject('posts','App\Models\Post')
 @inject('blood_type','App\Models\BloodType')
 @inject('city','App\Models\City')
 @inject('donations','App\Models\DonationRequest')
-@inject('settings','App\Models\Setting')
 @section('content')
 
     <!-- Header Start -->
@@ -35,9 +35,9 @@
                     <div class="swiper-button-prev"></div>
                 </button>
             </div>
-
+            <div class="swiper-wrapper">
                 @foreach($posts->all() as $post)
-                <div class="swiper-wrapper">
+                
                     <div class="swiper-slide">
                         <div class="card">
                             <div class="card-img-top" style="position: relative;">
@@ -48,14 +48,15 @@
                                 <h4 class="card-title">{{$post->title}}</h4>
                                 <p class="card-text">{{str_limit($post->content, 30)}}</p>
                                 <div class="btn-cont">
-                                    <button class="card-btn" onclick= "window.location.href = 'article.html';">Details</button>
+                                    <a class="card-btn" href="{{route('post', ['id' => $post->id])}}" >Details</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                </div>
+                
                 @endforeach
+                </div>
             </div>
         </div>
     </section>
@@ -70,24 +71,30 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-5">
-                <div class="form-group">
-                    {!! Form::select('blood_type_id', $blood_type::pluck('name', 'id'), null,
-                     ['class' => 'form-control',
-                     'id' => 'exampleInputSelect',
-                     'placeholder' => 'Select Blood Type ...']) !!}
-                </div>
+                {!! Form::model($model,[
+                    'action' => 'Website\MainController@filter',
+                    
+                    ]) !!}
+                    @include('partial.validate_errors')
+                    <div class="form-group">
+                        {!! Form::select('blood_type_id', $blood_type::pluck('name', 'id'), null,
+                        ['class' => 'form-control',
+                        'id' => 'exampleInputSelect',
+                        'placeholder' => 'Select Blood Type ...']) !!}
+                    </div>
                 </div>
                 <div class="col-lg-5">
-                <div class="form-group">
-                    {!! Form::select('city_id', $city::pluck('name', 'id'), null,
-                     ['class' => 'form-control',
-                     'id' => 'exampleInputSelect',
-                     'placeholder' => 'Select City ...']) !!}
-                </div>
+                    <div class="form-group">
+                        {!! Form::select('city_id', $city::pluck('name', 'id'), null,
+                        ['class' => 'form-control',
+                        'id' => 'exampleInputSelect',
+                        'placeholder' => 'Select City ...']) !!}
+                    </div> 
                 </div>
                 <div class="search">
-                    <button><i class="col-lg-2 fas fa-search"></i></button>
+                    <button type="submit"><i class="col-lg-2 fas fa-search"></i></button>
                 </div>
+                {!! Form::close() !!}
             </div>
             @foreach($donations->offset(0)->limit(3)->orderBy('created_at', 'desc')->get() as $donation)
             <div class="row">
@@ -104,8 +111,9 @@
                             <h4>City: {{$donation->city->name}}</h4>
                         </div>
                         <div class="col-lg-3">
-                            <button onclick= "window.location.href = 'donator.html';">Details</button>
-                        </div>
+                        <button class="card-btn"><a class="card-btn" href="{{route('donation', ['id' => $donation->id])}}" >Details</a>
+                        </button>
+                    </div>
                     </div>
                 </div>
             </div>

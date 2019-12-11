@@ -23,7 +23,7 @@
                 ]) !!}
                 @include('partial.validate_errors')
                 <div class="form-group">
-                    {!! Form::text('phone',null,[
+                    {!! Form::number('phone',null,[
                         'class' => 'form-control username',
                         'placeholder' => 'Phone'
                         ]) !!} 

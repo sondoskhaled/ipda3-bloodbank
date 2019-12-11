@@ -195,7 +195,23 @@ body {
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
 }
-
+.dislike{
+  position: absolute;
+  top: 15%;
+  left: 12%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: darkred;
+  color: white;
+  font-size: 22px;
+  padding: 8px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 30px;
+}
+.dislike:hover{
+  background-color: rgba(85, 85, 85, 0.678);
+}
 #articles .container .card .like {
   position: absolute;
   top: 15%;
@@ -226,7 +242,7 @@ body {
   border-radius: 30px;
 }
 
-#articles .container .card .like:hover {
+#articles .container .card .like:hover  {
   background-color: darkred;
 }
 

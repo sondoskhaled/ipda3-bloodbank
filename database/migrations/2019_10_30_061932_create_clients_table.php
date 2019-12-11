@@ -20,7 +20,7 @@ class CreateClientsTable extends Migration {
 			$table->integer('city_id')->unsigned();
 			$table->integer('blood_type_id')->unsigned();
 			$table->string('api_token', 60)->unique()->nullable();
-			$table->boolean('is_active')->default(0);
+			$table->boolean('is_active')->default(1);
 		});
 	}
 

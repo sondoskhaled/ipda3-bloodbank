@@ -133,7 +133,7 @@ class UserController extends Controller
 
     public function changePass (){
         return view('users.change_password');
-    }
+    } 
 
     public function changePassSave (Request $request, $id){
         if(Hash::check($request->old_password,Auth::user()->password)){
