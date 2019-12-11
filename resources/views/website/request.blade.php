@@ -18,10 +18,12 @@
     <!-- Sign Up Start -->
     <section id="sign-up">
         <div class="container">
+                @include('flash::message')
                 <img src="imgs/logo.png" alt="">
                 {!! Form::model($model,[
                 'action' => ['Website\MainController@requestSave',Auth::user()->id]
                 ]) !!}
+
                 @include('partial.validate_errors')
                 
                 <div class="form-group">

@@ -44,8 +44,6 @@ Route::group(['prefix' => 'client'],function(){
     Route::Post('/contact_us','Website\MainController@contactUsSave');
     Route::post('/filter_request','Website\MainController@filter');
     Route::get('/filter_request','Website\MainController@filter');
-    // Route::post('filter_client','ClientController@filter');
-    // Route::get('filter_client','ClientController@filter');
     
  });
 
